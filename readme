@@ -1,5 +1,14 @@
 Backend development repository for the PRADAN FPS Mobile app
 
+Project Structure :
+
+index.js
+configs/
+    |__config.js
+routes/
+    |__
+controllers/
+    |__
 
 Authors:
 Akshaykumar S
