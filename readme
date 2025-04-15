@@ -6,7 +6,7 @@ index.js
 configs/
     |__config.js
 routes/
-    |__
+    |__users.routes.js
 controllers/
     |__
 
