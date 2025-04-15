@@ -1,5 +1,7 @@
 Backend development repository for the PRADAN FPS Mobile app
 
+Built using express.js, mysql2
+
 Project Structure :
 
 index.js
@@ -8,8 +10,11 @@ configs/
 routes/
     |__users.routes.js
 controllers/
-    |__
+    |__users.controller.js
+middlewares/
+    |__asyncHandler.js
+
 
 Authors:
 Akshaykumar S
-Churchill L
+Churchill L (Database Admin)
