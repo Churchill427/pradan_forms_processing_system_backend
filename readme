@@ -1,5 +1,7 @@
 Backend development repository for the PRADAN FPS Mobile app
 
+Built using express.js, mysql2
+
 Project Structure :
 
 index.js
