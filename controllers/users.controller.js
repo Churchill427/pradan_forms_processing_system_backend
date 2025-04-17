@@ -2,7 +2,7 @@ const mysql = require("mysql2");
 const db = require("../configs/mysql_config");
 const asyncHandler = require("../middlewares/asyncHandler");
 
-    const authUSer_sql = `
+    const authUser_sql = `
       SELECT 
         CASE 
           WHEN EXISTS (
@@ -15,7 +15,7 @@ const asyncHandler = require("../middlewares/asyncHandler");
 
 exports.authUser = asyncHandler(async (req, res) => {
     const { username, password } = req.body;
-    db.query(authUSer_sql,[username, password],(err, results) => {
+    db.query(authUser_sql,[username, password],(err, results) => {
         if (err) {
           return res.status(500).json({ error: err.message });
         }
@@ -38,28 +38,20 @@ const changePassword_sql = `
 `;
 
 exports.changePassword = asyncHandler(async (req, res) => {
-    const { username, oldpassword, newpassword } = req.body;
-  
-    db.query(authUSer_sql, [username, oldpassword], (err, results1) => {
-      if (err) {
-        return res.status(500).json({ error: err.message });
-      }
-  
-      const login_success = results1[0].login_success;
-      console.log("login_success:", login_success);
-  
-      if (parseInt(login_success) === 1) {
-        db.query(changePassword_sql, [newpassword, username, oldpassword], (err, results) => {
-          if (err) {
-            return res.status(500).json({ error: err.message });
-          }
-          const password_changed = results.affectedRows > 0 ? 1 : 0;
-          console.log("password_changed:", password_changed);
-          return res.json(password_changed);
-        });
-      } else {
-        return res.json(0); // Invalid old credentials
-      }
-    });
+    const { username, oldPassword, newPassword } = req.body;
+    //console.log(req.body);
+    //console.log("username:", username);
+    //console.log("oldpassword:", oldPassword);
+    //console.log("newPassword:", newPassword);
+    db.query(changePassword_sql,[newPassword, username, oldPassword],(err, results) => {
+        if (err) {
+          return res.status(500).json({ error: err.message });
+        }
+        if (results.affectedRows > 0) {
+          return res.json(1);
+        } else {
+          return res.json(0);
+        }
+      });
   });
   
