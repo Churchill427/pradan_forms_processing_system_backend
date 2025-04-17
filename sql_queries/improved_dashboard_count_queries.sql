@@ -42,3 +42,21 @@
      AND status IN (1, 2, 3, 4)
      GROUP BY status`,
     [1] // user_id
+
+    // fixed_improvements
+
+    const query = `
+  SELECT s.status, COUNT(f.status) AS count
+  FROM (
+    SELECT 1 AS status
+    UNION ALL
+    SELECT 2
+    UNION ALL
+    SELECT 3
+    UNION ALL
+    SELECT 4
+  ) AS s
+  LEFT JOIN forms f ON f.status = s.status AND f.user_id = ?
+  GROUP BY s.status
+  ORDER BY s.status;
+`;
