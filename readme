@@ -6,11 +6,12 @@ Project Structure :
 
 index.js
 configs/
-    |__config.js
+    |__mysql_config.js
 routes/
     |__users.routes.js
 controllers/
     |__users.controller.js
+    |__userData.controller.js
 middlewares/
     |__asyncHandler.js
 
