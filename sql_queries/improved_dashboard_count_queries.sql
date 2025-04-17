@@ -33,3 +33,12 @@
      GROUP BY status`,
     [1, 4]
   );
+
+  //integrated count
+
+  `SELECT status, COUNT(*) AS count
+     FROM forms
+     WHERE user_id = ?
+     AND status IN (1, 2, 3, 4)
+     GROUP BY status`,
+    [1] // user_id
