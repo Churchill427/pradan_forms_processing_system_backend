@@ -13,6 +13,9 @@ app.use(express.json());
 const userRoutes = require('./routes/users.route');
 app.use('/api/users', userRoutes);
 
+const dashboardRoutes = require('./routes/dashboardData.route');
+app.use('/api/dashboard', dashboardRoutes);
+
 app.get("/", (req, res) => {
     res.send("✅ Backend is running and ready!");
   });
