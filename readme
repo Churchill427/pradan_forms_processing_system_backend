@@ -9,9 +9,11 @@ configs/
     |__mysql_config.js
 routes/
     |__users.routes.js
+    |__dashboardData.route.js
 controllers/
     |__users.controller.js
     |__userData.controller.js
+    |__dashboardData.controller.js    
 middlewares/
     |__asyncHandler.js
 
