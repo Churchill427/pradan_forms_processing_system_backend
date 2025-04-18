@@ -13,7 +13,7 @@ async function insertAllFormData() {
         id_type, id_number, gender, spouse, type_of_households, h_members,
         hh_occupation, special_catog, caste, house_owner, type_of_house,
         drinking_water, potability, domestic_water, toilet_avail, toilet_cond,
-        household_education, user_id, created_at, lat, lon, mcode, status
+        household_education, user_id, created_at, lat, lon, status
       ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)`,
       [2, 'FARMER_NAME', 'AGE', 9876543210, 'DISTRICT', 'BLOCK', 'PANCHAYAT', 'HAMLET',
        'ID_TYPE', 'ID_NUMBER', 'GENDER', 'SPOUSE', 'HOUSEHOLD_TYPE', 5,
@@ -47,9 +47,9 @@ async function insertAllFormData() {
       `INSERT INTO form_lands (
         form_id, ownership, well_irrigation, area_irrigated, irrigated_lands,
         patta, total_area, taluk, firka, revenue, crop_season, livestocks,
-        sf_number, soil_type, land_to_benefit, date_of_ins, area_benefited,
+        sf_number, soil_type, land_to_benefit, area_benefited,
         type_of_work, any_other_works, p_contribution, f_contribution,
-        total_est, field_insp, site_app, date_of_app, area_benefited_postfunding, verified_by
+        total_est, field_insp, date_of_app
       ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)`,
       [formId, 'OWNERSHIP', 'WELL_IRR', 'AREA_IRR', 'IRRIG_LAND',
        'PATTA', 'TOT_AREA', 'TALUK', 'FIRKA', 'REVENUE', 'CROP_SEASON', 'LIVESTOCK',
