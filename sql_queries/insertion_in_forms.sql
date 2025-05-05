@@ -8,13 +8,13 @@ async function insertAllFormData() {
 
     // 1. Insert into forms
     const [formResult] = await connection.execute(
-      `INSERT INTO forms (
-        form_type, farmer_name, age, mobile, district, block, panchayat, hamlet,
+     `INSERT INTO forms (
+        farmer_name, age, mobile, district, block, panchayat, hamlet,
         id_type, id_number, gender, spouse, type_of_households, h_members,
         hh_occupation, special_catog, caste, house_owner, type_of_house,
         drinking_water, potability, domestic_water, toilet_avail, toilet_cond,
-        household_education, user_id, created_at, lat, lon, status
-      ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)`,
+        household_education, user_id, created_at, lat, lon, status, form_type
+      ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)`,
       [2, 'FARMER_NAME', 'AGE', 9876543210, 'DISTRICT', 'BLOCK', 'PANCHAYAT', 'HAMLET',
        'ID_TYPE', 'ID_NUMBER', 'GENDER', 'SPOUSE', 'HOUSEHOLD_TYPE', 5,
        'OCCUPATION', 'SPECIAL_CAT', 'CASTE', 'OWNER', 'HOUSE_TYPE',
