@@ -1,26 +1,25 @@
-const mysql = require("mysql2");
+// controllers/userController.js
 const db = require("../configs/mysql_config");
 const asyncHandler = require("../middlewares/asyncHandler");
 
+exports.getUserData = asyncHandler(async (req, res) => {
+  const connection = await db.getConnection();
+  const username = req.params.username;
 
-exports.getUserData = asyncHandler(async (req, res) => { 
-    //console.log("Param:",req.params.username);
-    const username = req.params.username;
-    //console.log("username:", username);
-    const getUserData_sql = `
-        SELECT * FROM users WHERE email = ?
-    `;
-    db.query(getUserData_sql,[username],(err, results) => {
-        if (err) {
-          return res.status(500).json({ error: err.message });
-        }
-        if (results.length > 0) {
-          //console.log("results:",results[0]);
-          return res.json(results[0]);
-        } else {
-          return res.json(0);
-        }
-      });
-    //return res.json("response from getUserData");
-}
-);
+  try {
+    const [results] = await connection.execute(
+      "SELECT * FROM users WHERE email = ?",
+      [username]
+    );
+
+    if (results.length > 0) {
+      return res.json(results[0]);
+    } else {
+      return res.json(0);
+    }
+  } catch (err) {
+    return res.status(500).json({ error: err.message });
+  } finally {
+    connection.release(); // Always release the connection
+  }
+});

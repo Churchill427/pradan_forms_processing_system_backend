@@ -16,6 +16,9 @@ app.use('/api/users', userRoutes);
 const dashboardRoutes = require('./routes/dashboardData.route');
 app.use('/api/dashboard', dashboardRoutes);
 
+const formDataRoutes = require('./routes/formData.route');
+app.use('/api/formData', formDataRoutes);
+
 app.get("/", (req, res) => {
     res.send("✅ Backend is running and ready!");
   });
