@@ -65,7 +65,7 @@ exports.postLandformData = asyncHandler(async (req, res) => {
       safe(landformData.basicDetails.toiletAvailability),
       safe(landformData.basicDetails.toiletCondition),
       safe(landformData.basicDetails.education),
-      safe(landformData.id),
+      safe(landformData.user_id),
       safe(today),
       safe(landformData.landDevelopment.latitude),
       safe(landformData.landDevelopment.longitude),
@@ -94,7 +94,7 @@ exports.postLandformData = asyncHandler(async (req, res) => {
       safe(landformData.landDevelopment.soilTypeCombined),
       safe(landformData.landDevelopment.landBenefit),
       safe(landformData.landDevelopment.proposalArea),
-      safe(landformData.landDevelopment.workTypeCombined),
+      safe(landformData.landDevelopment.workType),
       safe(landformData.landDevelopment.otherWorks),
       safe(landformData.landDevelopment.pradanContribution),
       safe(landformData.landDevelopment.farmerContribution),
@@ -103,7 +103,7 @@ exports.postLandformData = asyncHandler(async (req, res) => {
       safe(today)
     ]);
 
-    console.log("form id:", form_id);
+    //console.log("form id:", form_id);
 
     // Insert bank details
     await connection.execute(postLandformData_bankdetails_sql, [
