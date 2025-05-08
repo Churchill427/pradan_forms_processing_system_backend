@@ -54,9 +54,8 @@ async function insertAllFormData() {
         patta, total_area, taluk, firka, revenue, crop_season, livestocks,
         sf_number, soil_type, land_to_benefit, date_of_ins, length, breadth,
         depth, volume, p_contribution, f_contribution, total_est, area_benefited,
-        field_insp, site_app, date_of_app, len_pf, bre_pf, dep_pf, vol_pf,
-        area_benefited_postfunding, verified_by
-      ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)`,
+        field_insp, site_app, date_of_app
+      ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)`,
       [formId, 'OWNERSHIP', 'WELL_IRR', 'AREA_IRR', 'IRRIG_LAND',
        'PATTA', 'TOT_AREA', 'TALUK', 'FIRKA', 'REVENUE', 'CROP_SEASON', 'LIVESTOCKS',
        'SF_NO', 'SOIL', 'LAND_BENEFIT', 'DATE_INS', '10', '20',
