@@ -15,8 +15,8 @@ const postPlantationformData_plantation_details_sql = `INSERT INTO plantation_de
   patta, total_area, taluk, firka, revenue, crop_season, livestocks,
   sf_number, soil_type, land_to_benefit, date_of_ins,
   area_benefited_by_proposal, any_other_works, p_contribution, f_contribution,
-  total_est, field_insp, date_of_app, plantaions
-) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)`;
+  total_est, field_insp, plantaions
+) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)`;
 
 const postPlantationformData_bankdetails_sql = `INSERT INTO bank_details (
   form_id, account_holder_name, account_number, bank_name,
@@ -101,7 +101,6 @@ exports.postPlantationformData = asyncHandler(async (req, res) => {
       safe(plantationformData.landDevelopment.pradanContribution),
       safe(plantationformData.landDevelopment.farmerContribution),
       safe(plantationformData.landDevelopment.totalEstimate),
-      safe(today),
       safe(today),
       safe(plantationformData.landDevelopment.workType2)
     ]);
