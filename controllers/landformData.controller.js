@@ -23,7 +23,7 @@ const postLandformData_bankdetails_sql = `INSERT INTO bank_details (
   branch, ifsc_code, farmer_ack
 ) VALUES (?, ?, ?, ?, ?, ?, ?)`;
 
-const postLandformData_files_sql = `INSERT INTO files (
+const postLandformData_submittedFiles_sql = `INSERT INTO files (
   form_id, identity, geotag, patta, fmb, photo, passbook
 ) VALUES (?, ?, ?, ?, ?, ?, ?)`;
 
@@ -66,7 +66,7 @@ exports.postLandformData = asyncHandler(async (req, res) => {
       safe(landformData.basicDetails.toiletCondition),
       safe(landformData.basicDetails.education),
       safe(landformData.user_id),
-      safe(today),
+      safe(landformData.landDevelopment.date),
       safe(landformData.landDevelopment.latitude),
       safe(landformData.landDevelopment.longitude),
       1,
@@ -114,19 +114,24 @@ exports.postLandformData = asyncHandler(async (req, res) => {
       safe(landformData.bankDetails.ifscCode),
       safe(landformData.bankDetails.farmerAgreed),
     ]);
+    // console.log("1",landformData);
+    // console.log("2",landformData?.bankDetails);
+    // console.log("3",landformData?.bankDetails?.submittedFiles);
+    // console.log("4",landformData?.bankDetails?.submittedFiles?.idCard);
 
-    // Optional: Insert files if present
-    // if (landformData.files) {
-    //   await connection.execute(postLandformData_files_sql, [
-    //     safe(form_id),
-    //     safe(landformData.files.identity),
-    //     safe(landformData.files.geotag),
-    //     safe(landformData.files.patta),
-    //     safe(landformData.files.fmb),
-    //     safe(landformData.files.photo),
-    //     safe(landformData.files.passbook),
-    //   ]);
-    // }
+    // console.log(landformData?.bankDetails?.submittedFiles?.idCard?.name);
+    // Optional: Insert submittedFiles if present
+    if (landformData.bankDetails.submittedFiles) {
+      await connection.execute(postLandformData_submittedFiles_sql, [
+        safe(form_id),
+        safe(landformData.bankDetails.submittedFiles.idCard.name),
+        safe(landformData.bankDetails.submittedFiles.geoTag.name),
+        safe(landformData.bankDetails.submittedFiles.patta.name),
+        safe(landformData.bankDetails.submittedFiles.fmb.name),
+        safe(landformData.bankDetails.submittedFiles.farmerPhoto.name),
+        safe(landformData.bankDetails.submittedFiles.bankPassbook.name)
+      ]);
+    }
 
     // Commit transaction
     await connection.commit();
