@@ -66,7 +66,7 @@ exports.postPondformData = asyncHandler(async (req, res) => {
       safe(pondformData.basicDetails.toiletCondition),
       safe(pondformData.basicDetails.education),
       safe(pondformData.user_id),
-      safe(today),
+      safe(pondformData.landDevelopment.date),
       safe(pondformData.landDevelopment.latitude),
       safe(pondformData.landDevelopment.longitude),
       1,
@@ -117,19 +117,19 @@ exports.postPondformData = asyncHandler(async (req, res) => {
       safe(pondformData.bankDetails.ifscCode),
       safe(pondformData.bankDetails.farmerAgreed),
     ]);
-
+    console.log(pondformData.bankDetails.submittedFiles.patta.name);
     // Optional: Insert files if present
-    // if (pondformData.files) {
-    //   await connection.execute(postLandformData_files_sql, [
-    //     safe(form_id),
-    //     safe(pondformData.files.identity),
-    //     safe(pondformData.files.geotag),
-    //     safe(pondformData.files.patta),
-    //     safe(pondformData.files.fmb),
-    //     safe(pondformData.files.photo),
-    //     safe(pondformData.files.passbook),
-    //   ]);
-    // }
+    if (pondformData.bankDetails.submittedFiles) {
+      await connection.execute(postLandformData_files_sql, [
+        safe(form_id),
+        safe(pondformData.bankDetails.submittedFiles.idCard.name),
+        safe(pondformData.bankDetails.submittedFiles.geoTag.name),
+        safe(pondformData.bankDetails.submittedFiles.patta.name),
+        safe(pondformData.bankDetails.submittedFiles.fmb.name),
+        safe(pondformData.bankDetails.submittedFiles.farmerPhoto.name),
+        safe(pondformData.bankDetails.submittedFiles.bankPassbook.name)
+      ]);
+    }
 
     // Commit transaction
     await connection.commit();
