@@ -176,7 +176,7 @@ const query = `
     LEFT JOIN form_lands ON form_lands.form_id = forms.id
     LEFT JOIN farm_pond_details ON farm_pond_details.form_id = forms.id
     LEFT JOIN plantation_details ON plantation_details.form_id = forms.id
-    WHERE forms.user_id = ?;
+    WHERE forms.id = ?;
     `;
 
 // Execute the query using MySQL2's query method
