@@ -15,8 +15,8 @@ const postPondformData_farm_pond_details_sql = `INSERT INTO farm_pond_details (
         patta, total_area, taluk, firka, revenue, crop_season, livestocks,
         sf_number, soil_type, land_to_benefit, date_of_ins, length, breadth,
         depth, volume, p_contribution, f_contribution, total_est, area_benefited,
-        field_insp, date_of_app
-      ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)`;
+        field_insp
+      ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)`;
 
 const postLandformData_bankdetails_sql = `INSERT INTO bank_details (
   form_id, account_holder_name, account_number, bank_name,
@@ -102,7 +102,6 @@ exports.postPondformData = asyncHandler(async (req, res) => {
       safe(pondformData.landDevelopment.farmerContribution),
       safe(pondformData.landDevelopment.totalEstimate),
       safe(pondformData.landDevelopment.landBenefit),
-      safe(today),
       safe(today)
     ]);
 

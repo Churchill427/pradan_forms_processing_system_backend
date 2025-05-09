@@ -20,7 +20,8 @@ const getTotalFormsStatusCount_sql = `
 
 exports.getTotalFormsStatusCount = asyncHandler(async (req, res) => {
   const connection = await db.getConnection();
-  const userId = req.params.userId;
+  const userId = req.query.user_id;
+  console.log(userId);
 
   try {
     const [results] = await connection.execute(getTotalFormsStatusCount_sql, [userId]);
@@ -59,11 +60,11 @@ const getTodayFormsStatusCount_sql = `
 exports.getTodayFormsStatusCount = asyncHandler(async (req, res) => {
   const connection = await db.getConnection();
   const date = new Date();
-  const userId = req.params.userId;
+  const user_id = req.query.user_id;
   const today =  new Date(date.getFullYear(), date.getMonth(), date.getDate()).toLocaleDateString('en-CA');// 'YYYY-MM-DD'
 
   try {
-    const [results] = await connection.execute(getTodayFormsStatusCount_sql, [userId, today]);
+    const [results] = await connection.execute(getTodayFormsStatusCount_sql, [user_id, today]);
     if (results.length > 0) {
       res.json(results);
     } else {
