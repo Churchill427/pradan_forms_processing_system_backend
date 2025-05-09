@@ -66,7 +66,7 @@ exports.postPlantationformData = asyncHandler(async (req, res) => {
       safe(plantationformData.basicDetails.toiletCondition),
       safe(plantationformData.basicDetails.education),
       safe(plantationformData.user_id),
-      safe(today),
+      safe(plantationformData.landDevelopment.date),
       safe(plantationformData.landDevelopment.latitude),
       safe(plantationformData.landDevelopment.longitude),
       1,
@@ -118,18 +118,19 @@ exports.postPlantationformData = asyncHandler(async (req, res) => {
       safe(plantationformData.bankDetails.farmerAgreed),
     ]);
 
-    // Optional: Insert files if present
-    // if (plantationformData.files) {
-    //   await connection.execute(postLandformData_files_sql, [
-    //     safe(form_id),
-    //     safe(plantationformData.files.identity),
-    //     safe(plantationformData.files.geotag),
-    //     safe(plantationformData.files.patta),
-    //     safe(plantationformData.files.fmb),
-    //     safe(plantationformData.files.photo),
-    //     safe(plantationformData.files.passbook),
-    //   ]);
-    // }
+    console.log(plantationformData.bankDetails.submittedFiles.patta.name);
+    //Optional: Insert files if present
+    if (plantationformData.bankDetails.submittedFiles) {
+      await connection.execute(postLandformData_files_sql, [
+        safe(form_id),
+        safe(plantationformData.bankDetails.submittedFiles.idCard.name),
+        safe(plantationformData.bankDetails.submittedFiles.geoTag.name),
+        safe(plantationformData.bankDetails.submittedFiles.patta.name),
+        safe(plantationformData.bankDetails.submittedFiles.fmb.name),
+        safe(plantationformData.bankDetails.submittedFiles.farmerPhoto.name),
+        safe(plantationformData.bankDetails.submittedFiles.bankPassbook.name)
+      ]);
+    }
 
     // Commit transaction
     await connection.commit();
