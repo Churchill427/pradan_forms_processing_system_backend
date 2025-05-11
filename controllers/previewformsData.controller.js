@@ -48,7 +48,7 @@ const getbasicdetails_sql = `SELECT
       forms.panchayat,
       forms.hamlet,
       forms.id_type as idCardType,
-      forms.id_number as IdCardNumber,
+      forms.id_number as idCardNumber,
       forms.gender,
       forms.spouse as fatherSpouse,
       forms.type_of_households as householdType,
@@ -68,18 +68,20 @@ const getbasicdetails_sql = `SELECT
     WHERE id = ?
   `;
 
-  const getbankdetails_sql = `    SELECT
-      bank_details.account_holder_name AS accountHolderName,
-      bank_details.account_number AS accountNumber,
-      bank_details.bank_name AS bankName,
-      bank_details.branch,
-      bank_details.ifsc_code AS ifscCode,
-      bank_details.farmer_ack AS farmerAgreed
-    FROM bank_details
-    WHERE id = ?
+  const getbankdetails_sql = `SELECT
+    bank_details.account_holder_name AS accountHolderName,
+    bank_details.account_number AS accountNumber,
+    bank_details.bank_name AS bankName,
+    bank_details.branch,
+    bank_details.ifsc_code AS ifscCode,
+    bank_details.farmer_ack AS farmerAgreed,
+    forms.status AS formStatus
+  FROM bank_details
+  JOIN forms ON bank_details.form_id = forms.id
+  WHERE bank_details.id = ?
   `;
 
-  const getlandownwershipdetails_sql = `SELECT
+  const getlandownwershipdetail_land_sql = `SELECT
       form_lands.ownership AS landOwnershipType,
       form_lands.well_irrigation AS hasWell,
       form_lands.area_irrigated AS areaIrrigated,
@@ -92,6 +94,36 @@ const getbasicdetails_sql = `SELECT
       form_lands.crop_season AS cropSeasonCombined,
       form_lands.livestocks AS livestockCombined
     FROM form_lands
+    WHERE form_id = ?`;
+
+    const getlandownwershipdetail_pond_sql = `SELECT 
+      ownership AS landOwnershipType,
+      well_irrigation AS hasWell,
+      area_irrigated AS areaIrrigated,
+      irrigated_lands AS irrigatedLandCombined,
+      patta AS pattaNumber,
+      total_area AS totalArea,
+      taluk,
+      firka,
+      revenue AS revenueVillage,
+      crop_season AS cropSeasonCombined,
+      livestocks AS livestockCombined
+    FROM farm_pond_details
+    WHERE form_id = ?`;
+
+    const getlandownwershipdetail_plant_sql = ` SELECT 
+      ownership AS landOwnershipType,
+      well_irrigation AS hasWell,
+      area_irrigated AS areaIrrigated,
+      irrigated_lands AS irrigatedLandCombined,
+      patta AS pattaNumber,
+      total_area AS totalArea,
+      taluk,
+      firka,
+      revenue AS revenueVillage,
+      crop_season AS cropSeasonCombined,
+      livestocks AS livestockCombined
+    FROM plantation_details
     WHERE form_id = ?`;
   
   const getlandformdetails_sql = `SELECT 
@@ -153,8 +185,8 @@ const getbasicdetails_sql = `SELECT
 exports.getpreviewspecificformData = asyncHandler( async (req, res) => {
   const  id  = req.query.form_id;
   const form_type = req.query.form_type;
-  console.log("Form ID",id);
-  console.log("Form type",typeof(form_type));
+  //console.log("Form ID",id);
+  //console.log("Form type",typeof(form_type));
   const connection = await db.getConnection();
 
   try {
@@ -163,40 +195,54 @@ exports.getpreviewspecificformData = asyncHandler( async (req, res) => {
       getbankdetails_sql,
       [id]
     );
-
+   // console.log(bankDetails);
     const [[basicDetails]] = await connection.execute(
       getbasicdetails_sql,
       [id]
     );
+    
     //fetch based on form type
     let landDevelopment;
+    let landOwnership;
     if (form_type == 1) {
       //fetch land form
       [[landDevelopment]] = await connection.execute(
       getlandformdetails_sql,
       [id,form_type]
     );
+      [[landOwnership]] = await connection.execute(
+      getlandownwershipdetail_land_sql,
+      [id]
+    );
+    console.log("land:",landOwnership);
     } else if (form_type == 2) {
       //fetch pond form
       [[landDevelopment]] = await connection.execute(
       getpondformdetails_sql,
       [id,form_type]
     );
+    [[landOwnership]] = await connection.execute(
+      getlandownwershipdetail_pond_sql,
+      [id]
+    );
+    console.log("pond:",landOwnership);
     } else if (form_type == 3) {
       //fetch plantation form
       [[landDevelopment]] = await connection.execute(
       getplantationformdetails_sql,
       [id,form_type]
     );
-    console.log(landDevelopment);
+    [[landOwnership]] = await connection.execute(
+      getlandownwershipdetail_plant_sql,
+      [id]
+    );
+    console.log("plantation:",landOwnership);
+    //console.log(landDevelopment);
     } else {
       return res.status(400).json({ error: 'Unknown form type' });
     }
 
-    const [[landOwnership]] = await connection.execute(
-      getlandownwershipdetails_sql,
-      [id]
-    );
+
 
     // 2. Fetch submitted files from separate table
     // const [[submittedFiles]] = await connection.execute(
@@ -226,7 +272,7 @@ exports.getpreviewspecificformData = asyncHandler( async (req, res) => {
       landDevelopment,
       landOwnership
     };
-    console.log(result);
+    //console.log(result);
     res.json(result);
 
   } catch (err) {

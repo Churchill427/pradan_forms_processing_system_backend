@@ -93,7 +93,7 @@ exports.postPondformData = asyncHandler(async (req, res) => {
       safe(pondformData.landDevelopment.sfNumber),
       safe(pondformData.landDevelopment.soilTypeCombined),
       safe(pondformData.landDevelopment.landBenefit),
-      safe(today),
+      safe(pondformData.landDevelopment.date),
       safe(pondformData.landDevelopment.length),
       safe(pondformData.landDevelopment.breadth),
       safe(pondformData.landDevelopment.depth),
@@ -102,7 +102,7 @@ exports.postPondformData = asyncHandler(async (req, res) => {
       safe(pondformData.landDevelopment.farmerContribution),
       safe(pondformData.landDevelopment.totalEstimate),
       safe(pondformData.landDevelopment.landBenefit),
-      safe(today)
+      safe(pondformData.user_id)
     ]);
 
     //console.log("form id:", form_id);

@@ -33,8 +33,8 @@ exports.postPlantationformData = asyncHandler(async (req, res) => {
 
   try {
     const plantationformData = req.body;
-    const date = new Date();
-    const today = new Date(date.getFullYear(), date.getMonth(), date.getDate()).toLocaleDateString('en-CA');
+    // const date = new Date();
+    // const today = new Date(date.getFullYear(), date.getMonth(), date.getDate()).toLocaleDateString('en-CA');
     console.log("Received landform data:", plantationformData);
 
     const safe = (value) => value === undefined ? null : value;
@@ -95,13 +95,13 @@ exports.postPlantationformData = asyncHandler(async (req, res) => {
       safe(plantationformData.landDevelopment.sfNumber),
       safe(plantationformData.landDevelopment.soilTypeCombined),
       safe(plantationformData.landDevelopment.landBenefit),
-      safe(today),
+      safe(plantationformData.landDevelopment.date),
       safe(plantationformData.landDevelopment.proposalArea),
       safe(plantationformData.landDevelopment.otherWorks),
       safe(plantationformData.landDevelopment.pradanContribution),
       safe(plantationformData.landDevelopment.farmerContribution),
       safe(plantationformData.landDevelopment.totalEstimate),
-      safe(today),
+      safe(plantationformData.user_id),
       safe(plantationformData.landDevelopment.workType2)
     ]);
 
@@ -118,7 +118,7 @@ exports.postPlantationformData = asyncHandler(async (req, res) => {
       safe(plantationformData.bankDetails.farmerAgreed),
     ]);
 
-    console.log(plantationformData.bankDetails.submittedFiles.patta.name);
+    //console.log(plantationformData.bankDetails.submittedFiles.patta.name);
     //Optional: Insert files if present
     if (plantationformData.bankDetails.submittedFiles) {
       await connection.execute(postLandformData_files_sql, [
