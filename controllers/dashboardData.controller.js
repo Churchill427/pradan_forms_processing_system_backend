@@ -59,9 +59,21 @@ const getTodayFormsStatusCount_sql = `
 
 exports.getTodayFormsStatusCount = asyncHandler(async (req, res) => {
   const connection = await db.getConnection();
-  const date = new Date();
+  //const date = new Date();
   const user_id = req.query.user_id;
-  const today =  new Date(date.getFullYear(), date.getMonth(), date.getDate()).toLocaleDateString('en-CA');// 'YYYY-MM-DD'
+  //const today =  new Date(date.getFullYear(), date.getMonth(), date.getDate()).toLocaleDateString('en-CA');// 'YYYY-MM-DD'
+  const getFormattedDate = () => {
+    const today = new Date();
+    const day = String(today.getDate()).padStart(2, '0');  // Add leading zero if day < 10
+    const month = String(today.getMonth() + 1).padStart(2, '0');  // Get month (0-11), so +1
+    const year = today.getFullYear();
+
+    return `${day}/${month}/${year}`;
+};
+
+//console.log(getFormattedDate());  // Output: 11/05/2025 (depending on today's date)
+
+   const today = getFormattedDate();
 
   try {
     const [results] = await connection.execute(getTodayFormsStatusCount_sql, [user_id, today]);

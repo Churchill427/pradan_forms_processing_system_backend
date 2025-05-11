@@ -15,8 +15,8 @@ const postLandformData_landdetails_sql = `INSERT INTO form_lands (
   patta, total_area, taluk, firka, revenue, crop_season, livestocks,
   sf_number, soil_type, land_to_benefit, area_benefited,
   type_of_work, any_other_works, p_contribution, f_contribution,
-  total_est, date_of_ins
-) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)`;
+  total_est, date_of_ins, field_insp
+) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)`;
 
 const postLandformData_bankdetails_sql = `INSERT INTO bank_details (
   form_id, account_holder_name, account_number, bank_name,
@@ -99,7 +99,8 @@ exports.postLandformData = asyncHandler(async (req, res) => {
       safe(landformData.landDevelopment.pradanContribution),
       safe(landformData.landDevelopment.farmerContribution),
       safe(landformData.landDevelopment.totalEstimate),
-      safe(today)
+      safe(landformData.landDevelopment.date),
+      safe(landformData.user_id)
     ]);
 
     //console.log("form id:", form_id);
