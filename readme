@@ -5,22 +5,31 @@ Built using express.js, mysql2
 Project Structure :
 
 index.js
+
 configs/
     |__mysql_config.js
+    |__s3_config.js
+
 routes/
     |__users.routes.js
     |__dashboardData.route.js
     |__formData.route.js
+    |__files.route.js
+
 controllers/
     |__users.controller.js
     |__userData.controller.js
     |__dashboardData.controller.js 
     |__landformData.controller.js
     |__plantationformData.controller.js
+    |__pondformData.controller.js
+    |__previewformsData.controller.js
+    |__s3fileurl.controller.js
+
 middlewares/
     |__asyncHandler.js
 
 
-Authors:
+Contributors:
 Akshaykumar S
 Churchill L (Database Admin)
