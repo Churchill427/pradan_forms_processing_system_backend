@@ -1,0 +1,98 @@
+const updateQuery = `
+  UPDATE forms
+  LEFT JOIN bank_details ON forms.id = bank_details.form_id
+  LEFT JOIN files ON forms.id = files.form_id
+  LEFT JOIN users ON forms.user_id = users.id
+  LEFT JOIN plantation_details ON forms.id = plantation_details.form_id
+  LEFT JOIN form_lands ON forms.id = form_lands.form_id
+  SET 
+    forms.form_type = 1,
+    forms.farmer_name = 'NEW_FARMER_NAME',
+    forms.age = 'NEW_AGE',
+    forms.mobile = 9876543210,
+    forms.district = 'NEW_DISTRICT',
+    forms.block = 'NEW_BLOCK',
+    forms.panchayat = 'NEW_PANCHAYAT',
+    forms.hamlet = 'NEW_HAMLET',
+    forms.id_type = 'NEW_ID_TYPE',
+    forms.id_number = 'NEW_ID_NUMBER',
+    forms.gender = 'NEW_GENDER',
+    forms.spouse = 'NEW_SPOUSE',
+    forms.type_of_households = 'NEW_HOUSEHOLD_TYPE',
+    forms.h_members = 5,
+    forms.hh_occupation = 'NEW_OCCUPATION',
+    forms.special_catog = 'NEW_SPECIAL_CAT',
+    forms.caste = 'NEW_CASTE',
+    forms.house_owner = 'NEW_OWNER',
+    forms.type_of_house = 'NEW_HOUSE_TYPE',
+    forms.drinking_water = 'NEW_DRINK_WATER',
+    forms.potability = 'NEW_POTABILITY',
+    forms.domestic_water = 'NEW_DOMESTIC_WATER',
+    forms.toilet_avail = 'NEW_TOILET_AVAIL',
+    forms.toilet_cond = 'NEW_TOILET_COND',
+    forms.household_education = 'NEW_EDUCATION',
+    forms.user_id = 1,
+    forms.created_at = '2025-04-16',
+    forms.lat = 'NEW_LAT',
+    forms.lon = 'NEW_LON',
+    forms.mcode = 'NEW_MCODE',
+    forms.status = 1,
+    forms.remarks = 'bdjkc',
+
+    bank_details.account_holder_name = 'NEW_ACCOUNT_HOLDER',
+    bank_details.account_number = 123456789012,
+    bank_details.bank_name = 'NEW_BANK_NAME',
+    bank_details.branch = 'NEW_BRANCH_NAME',
+    bank_details.ifsc_code = 'NEW_IFSC',
+    bank_details.farmer_ack = 'NEW_ACK',
+
+    files.identity = 'NEW_IDENTITY_DOC',
+    files.geotag = 'NEW_GEOTAG_URL',
+    files.patta = 'NEW_PATTA_DOC',
+    files.fmb = 'NEW_FMB_DOC',
+    files.photo = 'NEW_PHOTO_URL',
+    files.passbook = 'NEW_PASSBOOK_DOC',
+    files.passbook_postfunding = 'bduhdj',
+    files.payment_voucher = 'vhdbhej',
+
+    form_lands.ownership = 'NEW_OWNERSHIP',
+    form_lands.well_irrigation = 'NEW_WELL_IRR',
+    form_lands.area_irrigated = 'NEW_AREA_IRR',
+    form_lands.irrigated_lands = 'NEW_IRRIG_LAND',
+    form_lands.patta = 'NEW_PATTA',
+    form_lands.total_area = 'NEW_TOT_AREA',
+    form_lands.taluk = 'NEW_TALUK',
+    form_lands.firka = 'NEW_FIRKA',
+    form_lands.revenue = 'NEW_REVENUE',
+    form_lands.crop_season = 'NEW_CROP_SEASON',
+    form_lands.livestocks = 'NEW_LIVESTOCK',
+    form_lands.sf_number = 'NEW_SF_NO',
+    form_lands.soil_type = 'NEW_SOIL',
+    form_lands.land_to_benefit = 'NEW_LAND_BENEFIT',
+    form_lands.date_of_ins = 'NEW_DATE_INS',
+    form_lands.area_benefited = 'NEW_AREA_BENEFITED',
+    form_lands.type_of_work = 'NEW_WORK_TYPE',
+    form_lands.any_other_works = 'NEW_OTHER_WORKS',
+    form_lands.p_contribution = 'NEW_P_CONTRI',
+    form_lands.f_contribution = 'NEW_F_CONTRI',
+    form_lands.total_est = 'NEW_EST_TOTAL',
+    form_lands.field_insp = 'NEW_INSP',
+    form_lands.site_app = 'NEW_APP',
+    form_lands.date_of_app = 'NEW_APP_DATE',
+    form_lands.area_benefited_postfunding = 'NEW_POSTFUNDING_AREA',
+    form_lands.verified_by = 'NEW_VERIFIED_BY',
+
+    users.name = 'NEW_NAME',
+    users.email = 'NEW_EMAIL',
+    users.password = 'NEW_PASSWORD',
+    users.role = 'NEW_ROLE',
+    users.mobile = 'NEW_MOBILE',
+    users.date_of_joining = 'NEW_DATE_OF_JOINING',
+    users.location = 'NEW_LOCATION',
+    users.created_at = 'NEW_CREATED_AT',
+    users.photo = 'NEW_PHOTO_URL'
+
+  WHERE
+    forms.form_type = '1'
+    AND forms.id = ?;  -- using prepared statement for form_id
+`;
