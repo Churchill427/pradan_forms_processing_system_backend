@@ -3,7 +3,6 @@ const updateQuery = `
   LEFT JOIN bank_details ON forms.id = bank_details.form_id
   LEFT JOIN files ON forms.id = files.form_id
   LEFT JOIN users ON forms.user_id = users.id
-  LEFT JOIN plantation_details ON forms.id = plantation_details.form_id
   LEFT JOIN form_lands ON forms.id = form_lands.form_id
   SET 
     forms.form_type = ?, 
