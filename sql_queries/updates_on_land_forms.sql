@@ -2,10 +2,8 @@ const updateQuery = `
   UPDATE forms
   LEFT JOIN bank_details ON forms.id = bank_details.form_id
   LEFT JOIN files ON forms.id = files.form_id
-  LEFT JOIN users ON forms.user_id = users.id
   LEFT JOIN form_lands ON forms.id = form_lands.form_id
-  SET 
-    forms.form_type = ?, 
+  SET  
     forms.farmer_name = ?, 
     forms.age = ?, 
     forms.mobile = ?, 
@@ -30,8 +28,6 @@ const updateQuery = `
     forms.toilet_avail = ?, 
     forms.toilet_cond = ?, 
     forms.household_education = ?, 
-    forms.user_id = ?, 
-    forms.created_at = ?, 
     forms.lat = ?, 
     forms.lon = ?,
 
@@ -42,7 +38,7 @@ const updateQuery = `
     bank_details.ifsc_code = ?, 
     bank_details.farmer_ack = ?, 
 
-    files.identity = ?, 
+    files.identity= ?, 
     files.geotag = ?, 
     files.patta = ?, 
     files.fmb = ?, 
@@ -70,7 +66,6 @@ const updateQuery = `
     form_lands.p_contribution = ?, 
     form_lands.f_contribution = ?, 
     form_lands.total_est = ?, 
-    form_lands.field_insp = ?, 
 
 
   WHERE 
