@@ -33,10 +33,7 @@ const updateQuery = `
     forms.user_id = ?, 
     forms.created_at = ?, 
     forms.lat = ?, 
-    forms.lon = ?, 
-    forms.mcode = ?, 
-    forms.status = ?, 
-    forms.remarks = ?, 
+    forms.lon = ?,
 
     bank_details.account_holder_name = ?, 
     bank_details.account_number = ?, 
@@ -50,9 +47,7 @@ const updateQuery = `
     files.patta = ?, 
     files.fmb = ?, 
     files.photo = ?, 
-    files.passbook = ?, 
-    files.passbook_postfunding = ?, 
-    files.payment_voucher = ?, 
+    files.passbook = ?,
 
     form_lands.ownership = ?, 
     form_lands.well_irrigation = ?, 
@@ -76,20 +71,7 @@ const updateQuery = `
     form_lands.f_contribution = ?, 
     form_lands.total_est = ?, 
     form_lands.field_insp = ?, 
-    form_lands.site_app = ?, 
-    form_lands.date_of_app = ?, 
-    form_lands.area_benefited_postfunding = ?, 
-    form_lands.verified_by = ?, 
 
-    users.name = ?, 
-    users.email = ?, 
-    users.password = ?, 
-    users.role = ?, 
-    users.mobile = ?, 
-    users.date_of_joining = ?, 
-    users.location = ?, 
-    users.created_at = ?, 
-    users.photo = ? 
 
   WHERE 
     forms.form_type = 1
