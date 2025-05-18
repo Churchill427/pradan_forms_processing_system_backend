@@ -1,6 +1,8 @@
 const db = require("../configs/mysql_config");
 const asyncHandler = require("../middlewares/asyncHandler");
 
+//Get data for preview cards
+
 const getpreviewformsData_sql = `SELECT 
         forms.id, 
         forms.form_type, 
@@ -37,6 +39,7 @@ exports.getpreviewformsData = asyncHandler(async (req, res) => {
     }
   });
 
+// Get specific form data for preview
 
 const getbasicdetails_sql = `SELECT
       forms.id AS form_id,
@@ -190,7 +193,7 @@ exports.getpreviewspecificformData = asyncHandler( async (req, res) => {
   const connection = await db.getConnection();
 
   try {
-    // 1. Fetch common form data from respective tables
+    // Fetch common form data from respective tables
     const [[bankDetails]] = await connection.execute(
       getbankdetails_sql,
       [id]
@@ -244,26 +247,26 @@ exports.getpreviewspecificformData = asyncHandler( async (req, res) => {
 
 
 
-    // 2. Fetch submitted files from separate table
-    // const [[submittedFiles]] = await connection.execute(
-    //   'SELECT * FROM submitted_files WHERE form_id = ?',
-    //   [id]
-    // );
+   // Fetch submitted files from separate table
+    const [[submittedFiles]] = await connection.execute(
+      'SELECT * FROM files WHERE form_id = ?',
+      [id]
+    );
 
-    // 3. Handle if any main block is missing
-    // if (!bankDetails || !basicDetails || !landDevelopment || !landOwnership) {
-    //   return res.status(404).json({ error: 'Form data not found' });
-    // }
+    //Handle if any main block is missing
+    if (!bankDetails || !basicDetails || !landDevelopment || !landOwnership) {
+      return res.status(404).json({ error: 'Form data not found' });
+    }
 
-    // 4. Insert submittedFiles into bankDetails
-    // bankDetails.submittedFiles = {
-    //   bankPassbook: submittedFiles?.bankPassbook || null,
-    //   farmerPhoto: submittedFiles?.farmerPhoto || null,
-    //   fmb: submittedFiles?.fmb || null,
-    //   geoTag: submittedFiles?.geoTag || null,
-    //   idCard: submittedFiles?.idCard || null,
-    //   patta: submittedFiles?.patta || null,
-    // };
+    //Insert submittedFiles into bankDetails
+    bankDetails.submittedFiles = {
+      bankPassbook: submittedFiles?.bankPassbook || null,
+      farmerPhoto: submittedFiles?.farmerPhoto || null,
+      fmb: submittedFiles?.fmb || null,
+      geoTag: submittedFiles?.geoTag || null,
+      idCard: submittedFiles?.idCard || null,
+      patta: submittedFiles?.patta || null,
+    };
 
     // 5. Final combined response
     const result = {

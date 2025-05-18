@@ -74,6 +74,7 @@ exports.getTodayFormsStatusCount = asyncHandler(async (req, res) => {
 //console.log(getFormattedDate());  // Output: 11/05/2025 (depending on today's date)
 
    const today = getFormattedDate();
+  //  console.log(today);
 
   try {
     const [results] = await connection.execute(getTodayFormsStatusCount_sql, [user_id, today]);
