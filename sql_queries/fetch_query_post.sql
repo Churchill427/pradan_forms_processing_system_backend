@@ -19,9 +19,9 @@ const query = `
     form_lands.total_area
   FROM 
     forms
-  JOIN 
+  LEFT JOIN 
     form_lands ON forms.id = form_lands.form_id
-  JOIN 
+  LEFT JOIN 
     files ON forms.id = files.form_id
   WHERE 
     forms.form_type = 1
@@ -56,9 +56,9 @@ const query = `
     plantation_details.tot_price
   FROM 
     forms
-  JOIN 
+  LEFT JOIN 
     plantation_details ON forms.id = plantation_details.form_id
-  JOIN 
+  LEFT JOIN 
     files ON forms.id = files.form_id
   WHERE 
     forms.form_type = 3
@@ -89,9 +89,9 @@ const query = `
     farm_pond_details.total_est
   FROM 
     forms
-  JOIN 
+  LEFT JOIN 
     farm_pond_details ON forms.id = farm_pond_details.form_id
-  JOIN 
+  LEFT JOIN 
     files ON forms.id = files.form_id
   WHERE 
     forms.form_type = 2
