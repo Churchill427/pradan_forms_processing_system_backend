@@ -16,7 +16,7 @@ const ContentType = 'application/pdf'; // Set the content type to PDF
         return res.status(400).json({ error: "Missing 'fileName' in query params" });
       }
       
-    console.log(Key);
+    //console.log(Key);
 
 
   const command = new PutObjectCommand({Bucket, Key, ContentType});
