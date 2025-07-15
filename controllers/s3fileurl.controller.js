@@ -6,7 +6,7 @@ const { s3 } = require("../configs/s3_config"); // Import the S3 client from con
 
 const Bucket = process.env.AWS_BUCKET_NAME; // Your S3 bucket name
 //const Key ='farmpond4.pdf';
-const Expires = 90; // URL valid for 60 seconds
+const Expires = 90; // URL valid for 90 seconds
 const ContentType = 'application/pdf'; // Set the content type to PDF
 
  //get-upload url
