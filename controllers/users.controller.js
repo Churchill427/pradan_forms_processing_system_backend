@@ -4,7 +4,7 @@ const asyncHandler = require("../middlewares/asyncHandler");
 const authUser_sql = `
   SELECT 
     CASE 
-      WHEN EXISTS (
+      WHEN EXISTS ( 
         SELECT * FROM users WHERE email = ? AND password = ?
       )
       THEN '1'

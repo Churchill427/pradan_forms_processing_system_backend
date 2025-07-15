@@ -35,7 +35,7 @@ exports.postPondformData = asyncHandler(async (req, res) => {
     const pondformData = req.body;
     const date = new Date();
     const today = new Date(date.getFullYear(), date.getMonth(), date.getDate()).toLocaleDateString('en-CA');
-   // console.log("Received landform data:", pondformData);
+    console.log("Received landform data:", pondformData);
 
     const safe = (value) => value === undefined ? null : value;
 
