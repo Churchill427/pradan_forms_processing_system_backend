@@ -38,7 +38,7 @@ exports.postLandformData = asyncHandler(async (req, res) => {
     const landformData = req.body;
     const date = new Date();
     const today = new Date(date.getFullYear(), date.getMonth(), date.getDate()).toLocaleDateString('en-CA');
-    //console.log("Received landform data:", landformData);
+    console.log("Received landform data:", landformData);
 
     const safe = (value) => value === undefined ? null : value;
 
@@ -344,6 +344,10 @@ exports.updateLandformData = asyncHandler(async (req, res) => {
     console.log("Landform Query executed");
     if (results.affectedRows > 0) {
       res.status(200).json({ message: "Form data updated successfully" });
+    }
+    else{
+      console.log("form not found");
+      res.status(404).json({ message: "Form not found" });
     }
     await connection.commit();
   } catch (err) {

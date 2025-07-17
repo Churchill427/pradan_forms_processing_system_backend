@@ -217,7 +217,7 @@ exports.getpreviewspecificformData = asyncHandler( async (req, res) => {
       getlandownwershipdetail_land_sql,
       [id]
     );
-    console.log("land:",landOwnership);
+    //console.log("land:",landOwnership);
     } else if (form_type == 2) {
       //fetch pond form
       [[landDevelopment]] = await connection.execute(
@@ -228,7 +228,7 @@ exports.getpreviewspecificformData = asyncHandler( async (req, res) => {
       getlandownwershipdetail_pond_sql,
       [id]
     );
-    console.log("pond:",landOwnership);
+    //console.log("pond:",landOwnership);
     } else if (form_type == 3) {
       //fetch plantation form
       [[landDevelopment]] = await connection.execute(
@@ -239,7 +239,7 @@ exports.getpreviewspecificformData = asyncHandler( async (req, res) => {
       getlandownwershipdetail_plant_sql,
       [id]
     );
-    console.log("plantation:",landOwnership);
+    //console.log("plantation:",landOwnership);
     //console.log(landDevelopment);
     } else {
       return res.status(400).json({ error: 'Unknown form type' });
