@@ -1,0 +1,97 @@
+//land form
+
+
+const selectQuery = `
+  SELECT 
+    forms.farmer_name,
+    forms.spouse,
+    forms.mcode,
+    forms.hamlet,
+    forms.panchayat,
+    forms.district,
+    forms.block,
+    form_lands.revenue,
+    form_lands.p_contribution,
+    form_lands.f_contribution,
+    form_lands.total_area,
+    form_lands.measured_by,
+    form_lands.verified_by,
+    form_lands.total_est
+  FROM 
+    forms
+  LEFT JOIN 
+    form_lands ON forms.id = form_lands.form_id
+  WHERE 
+    forms.id = ?
+    AND forms.form_type = 1
+`;
+
+
+
+//pond form
+
+const selectQuery1 = `
+  SELECT 
+    forms.farmer_name,
+    forms.spouse,
+    forms.mcode,
+    forms.hamlet,
+    forms.panchayat,
+    forms.district,
+    forms.block,
+    farm_pond_details.revenue,
+    farm_pond_details.p_contribution,
+    farm_pond_details.f_contribution,
+    farm_pond_details.length,
+    farm_pond_details.breadth,
+    farm_pond_details.depth,
+    farm_pond_details.volume,
+    farm_pond_details.measured_by,
+    farm_pond_details.verified_by,
+    farm_pond_details.total_est
+  FROM 
+    forms
+  LEFT JOIN 
+    farm_pond_details ON forms.id = farm_pond_details.form_id
+  WHERE 
+    forms.id = ?
+    AND forms.form_type = 2
+`;
+
+
+
+
+//plantations
+
+
+
+const selectQuery2 = `
+  SELECT 
+    forms.farmer_name,
+    forms.spouse,
+    forms.mcode,
+    forms.hamlet,
+    forms.panchayat,
+    forms.district,
+    forms.block,
+    plantation_details.revenue,
+    plantation_details.total_area,
+    plantation_details.plantaions,
+    plantation_details.nos,
+    plantation_details.price,
+    plantation_details.other_exp,
+    plantation_details.tot_nos,
+    plantation_details.tot_price,
+    plantation_details.p_contribution,
+    plantation_details.f_contribution,
+    plantation_details.measured_by,
+    plantation_details.verified_by,
+    plantation_details.total_est
+  FROM 
+    forms
+  LEFT JOIN 
+    plantation_details ON forms.id = plantation_details.form_id
+  WHERE 
+    forms.id = ?
+    AND forms.form_type = 3
+`;
