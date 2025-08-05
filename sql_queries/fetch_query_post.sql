@@ -55,7 +55,7 @@ const query = `
     plantation_details.tot_nos,
     plantation_details.tot_price
   FROM 
-    forms
+    forms 
   LEFT JOIN 
     plantation_details ON forms.id = plantation_details.form_id
   LEFT JOIN 

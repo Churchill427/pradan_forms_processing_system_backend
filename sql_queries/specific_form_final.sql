@@ -53,16 +53,14 @@ const [rows] = await connection.execute(`
 
 
 const [rows] = await connection.execute(`
-    SELECT
-      bank_details.account_holder_name AS accountHolderName,
-      bank_details.account_number AS accountNumber,
-      bank_details.bank_name AS bankName,
-      bank_details.branch,
-      bank_details.ifsc_code AS ifscCode,
-      bank_details.farmer_ack AS farmerAgreed
-    FROM bank_details
-    WHERE id = ?
-  `, [1]);
+          SELECT 
+        bank_details.account_holder_name AS accountHolderName,
+          bank_details.bank_name AS bankName,
+          bank_details.branch,
+          bank_details.ifsc_code AS ifscCode,
+          bank_details.farmer_ack AS farmerAgreed
+      FROM bank_details
+      JOIN forms ON bank_details.form_id = forms.id WHERE forms.id = ?`, [1]);
 
 
 

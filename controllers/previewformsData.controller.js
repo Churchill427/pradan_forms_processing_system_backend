@@ -71,18 +71,14 @@ const getbasicdetails_sql = `SELECT
     WHERE id = ?
   `;
 
-  const getbankdetails_sql = `SELECT
-    bank_details.account_holder_name AS accountHolderName,
-    bank_details.account_number AS accountNumber,
-    bank_details.bank_name AS bankName,
-    bank_details.branch,
-    bank_details.ifsc_code AS ifscCode,
-    bank_details.farmer_ack AS farmerAgreed,
-    forms.status AS formStatus
-  FROM bank_details
-  JOIN forms ON bank_details.form_id = forms.id
-  WHERE bank_details.id = ?
-  `;
+  const getbankdetails_sql = `SELECT 
+        bank_details.account_holder_name AS accountHolderName,
+        bank_details.bank_name AS bankName,
+        bank_details.branch,
+        bank_details.ifsc_code AS ifscCode,
+        bank_details.farmer_ack AS farmerAgreed
+    FROM bank_details
+    JOIN forms ON bank_details.form_id = forms.id WHERE forms.id = ? `;
 
   const getlandownwershipdetail_land_sql = `SELECT
       form_lands.ownership AS landOwnershipType,
@@ -253,6 +249,19 @@ exports.getpreviewspecificformData = asyncHandler( async (req, res) => {
       [id]
     );
 
+    // const submittedFiles = {
+    //   "bankPassbook": null,
+    //   "farmerPhoto": null,
+    //   "fmb": null,
+    //   "geoTag": null,
+    //   "idCard": null,
+    //         "patta": null
+    //     };
+    
+    // console.log(bankDetails);
+    // console.log(basicDetails);
+    // console.log(landDevelopment);
+    // console.log(landOwnership);
     //Handle if any main block is missing
     if (!bankDetails || !basicDetails || !landDevelopment || !landOwnership) {
       return res.status(404).json({ error: 'Form data not found' });
