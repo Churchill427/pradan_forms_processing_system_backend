@@ -74,6 +74,7 @@ const getbasicdetails_sql = `SELECT
 
   const getbankdetails_sql = `SELECT 
         bank_details.account_holder_name AS accountHolderName,
+         bank_details.account_number AS accountNumber,
         bank_details.bank_name AS bankName,
         bank_details.branch,
         bank_details.ifsc_code AS ifscCode,
