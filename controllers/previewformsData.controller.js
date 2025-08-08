@@ -46,6 +46,7 @@ const getbasicdetails_sql = `SELECT
       forms.farmer_name as name,
       forms.age,
       forms.mobile,
+      forms.remarks,
       forms.district,
       forms.status,
       forms.block,
