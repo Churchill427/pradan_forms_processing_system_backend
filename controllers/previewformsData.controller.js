@@ -47,6 +47,7 @@ const getbasicdetails_sql = `SELECT
       forms.age,
       forms.mobile,
       forms.district,
+      forms.status,
       forms.block,
       forms.panchayat,
       forms.hamlet,
@@ -184,8 +185,8 @@ const getbasicdetails_sql = `SELECT
 exports.getpreviewspecificformData = asyncHandler( async (req, res) => {
   const  id  = req.query.form_id;
   const form_type = req.query.form_type;
-  //console.log("Form ID",id);
-  //console.log("Form type",typeof(form_type));
+  // console.log("Form ID",id);
+  // console.log("Form type",typeof(form_type));
   const connection = await db.getConnection();
 
   try {
