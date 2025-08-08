@@ -272,11 +272,11 @@ exports.getpreviewspecificformData = asyncHandler( async (req, res) => {
 
     //Insert submittedFiles into bankDetails
     bankDetails.submittedFiles = {
-      bankPassbook: submittedFiles?.bankPassbook || null,
-      farmerPhoto: submittedFiles?.farmerPhoto || null,
+      bankPassbook: submittedFiles?.passbook || null,
+      farmerPhoto: submittedFiles?.photo || null,
       fmb: submittedFiles?.fmb || null,
-      geoTag: submittedFiles?.geoTag || null,
-      idCard: submittedFiles?.idCard || null,
+      geoTag: submittedFiles?.geotag || null,
+      idCard: submittedFiles?.identity || null,
       patta: submittedFiles?.patta || null,
     };
 
