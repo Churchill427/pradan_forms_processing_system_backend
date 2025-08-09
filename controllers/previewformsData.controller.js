@@ -10,6 +10,7 @@ const getpreviewformsData_sql = `SELECT
         forms.created_at, 
         forms.status,
         forms.gender,
+        forms.remarks,
         forms.block,
         forms.hamlet,
         forms.panchayat
@@ -46,7 +47,6 @@ const getbasicdetails_sql = `SELECT
       forms.farmer_name as name,
       forms.age,
       forms.mobile,
-      forms.remarks,
       forms.district,
       forms.status,
       forms.block,
