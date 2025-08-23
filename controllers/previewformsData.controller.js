@@ -10,6 +10,7 @@ const getpreviewformsData_sql = `SELECT
         forms.created_at, 
         forms.status,
         forms.gender,
+        forms.remarks,
         forms.block,
         forms.hamlet,
         forms.panchayat
@@ -74,6 +75,7 @@ const getbasicdetails_sql = `SELECT
 
   const getbankdetails_sql = `SELECT 
         bank_details.account_holder_name AS accountHolderName,
+         bank_details.account_number AS accountNumber,
         bank_details.bank_name AS bankName,
         bank_details.branch,
         bank_details.ifsc_code AS ifscCode,
@@ -270,11 +272,11 @@ exports.getpreviewspecificformData = asyncHandler( async (req, res) => {
 
     //Insert submittedFiles into bankDetails
     bankDetails.submittedFiles = {
-      bankPassbook: submittedFiles?.bankPassbook || null,
-      farmerPhoto: submittedFiles?.farmerPhoto || null,
+      bankPassbook: submittedFiles?.passbook || null,
+      farmerPhoto: submittedFiles?.photo || null,
       fmb: submittedFiles?.fmb || null,
-      geoTag: submittedFiles?.geoTag || null,
-      idCard: submittedFiles?.idCard || null,
+      geoTag: submittedFiles?.geotag || null,
+      idCard: submittedFiles?.identity || null,
       patta: submittedFiles?.patta || null,
     };
 
